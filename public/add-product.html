@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إضافة منتج</title>
+  <title>Add Product</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>إضافة منتج جديد</h1>
+    <h1>Add New Product</h1>
     <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="#" onclick="logout()">تسجيل الخروج</a>
+      <a href="index.html">Home</a>
+      <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
 
   <main>
     <form id="addProductForm" enctype="multipart/form-data">
-      <input type="text" name="name" placeholder="اسم المنتج" required>
-      <input type="text" name="description" placeholder="الوصف" required>
-      <input type="text" name="category" placeholder="التصنيف" required>
+      <input type="text" name="name" placeholder="Product Name" required>
+      <input type="text" name="description" placeholder="Description" required>
+      <input type="text" name="category" placeholder="Category" required>
       <input type="file" name="image" accept="image/*">
-      <button type="submit">إضافة المنتج</button>
+      <button type="submit">Add Product</button>
     </form>
   </main>
 

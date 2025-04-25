@@ -1,6 +1,5 @@
 const API_URL = 'http://localhost:5000/api';
 
-// التحقق من المصادقة (Authentication)
 function checkAuth() {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
@@ -27,7 +26,6 @@ function checkAuth() {
   }
 }
 
-// تسجيل الدخول
 async function login(data) {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
@@ -39,17 +37,16 @@ async function login(data) {
     if (response.ok) {
       localStorage.setItem('token', result.token);
       localStorage.setItem('role', result.user.role);
-      alert('تم تسجيل الدخول بنجاح');
+      alert('Login successful');
       window.location.href = 'index.html';
     } else {
       alert(result.message);
     }
   } catch (error) {
-    alert('خطأ: ' + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
-// التسجيل
 async function register(data) {
   try {
     const response = await fetch(`${API_URL}/auth/register`, {
@@ -61,24 +58,22 @@ async function register(data) {
     if (response.ok) {
       localStorage.setItem('token', result.token);
       localStorage.setItem('role', result.user.role);
-      alert('تم إنشاء الحساب بنجاح');
+      alert('Account created successfully');
       window.location.href = 'index.html';
     } else {
       alert(result.message);
     }
   } catch (error) {
-    alert('خطأ: ' + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
-// تسجيل الخروج
 function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('role');
   window.location.href = 'login.html';
 }
 
-// جلب المنتجات
 async function fetchProducts() {
   try {
     const response = await fetch(`${API_URL}/products`);
@@ -92,17 +87,17 @@ async function fetchProducts() {
         <img src="${product.image || 'default.png'}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <p>التصنيف: ${product.category}</p>
-        <p>البائع: ${product.seller.username}</p>
+        <p>Category: ${product.category}</p>
+        <p>Seller: ${product.seller.username}</p>
       `;
       productsContainer.appendChild(productCard);
     });
   } catch (error) {
-    alert('خطأ أثناء جلب المنتجات: ' + error.message);
+    alert('Error fetching products: ' + error.message);
   }
 }
 
-// البحث في المنتجات
+// Search for products
 async function searchProducts() {
   const searchQuery = document.getElementById('searchInput').value;
   try {
@@ -117,17 +112,16 @@ async function searchProducts() {
         <img src="${product.image || 'default.png'}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <p>التصنيف: ${product.category}</p>
-        <p>البائع: ${product.seller.username}</p>
+        <p>Category: ${product.category}</p>
+        <p>Seller: ${product.seller.username}</p>
       `;
       productsContainer.appendChild(productCard);
     });
   } catch (error) {
-    alert('خطأ أثناء البحث: ' + error.message);
+    alert('Error during search: ' + error.message);
   }
 }
 
-// إضافة منتج
 async function addProduct(formData) {
   try {
     const response = await fetch(`${API_URL}/products`, {
@@ -137,17 +131,16 @@ async function addProduct(formData) {
     });
     const result = await response.json();
     if (response.ok) {
-      alert('تم إضافة المنتج بنجاح');
+      alert('Product added successfully');
       window.location.href = 'index.html';
     } else {
       alert(result.message);
     }
   } catch (error) {
-    alert('خطأ أثناء إضافة المنتج: ' + error.message);
+    alert('Error adding product: ' + error.message);
   }
 }
 
-// متابعة بائع
 async function followSeller(sellerId) {
   try {
     const response = await fetch(`${API_URL}/users/follow/${sellerId}`, {
@@ -156,16 +149,15 @@ async function followSeller(sellerId) {
     });
     const result = await response.json();
     if (response.ok) {
-      alert('تمت المتابعة بنجاح');
+      alert('Seller followed successfully');
     } else {
       alert(result.message);
     }
   } catch (error) {
-    alert('خطأ أثناء المتابعة: ' + error.message);
+    alert('Error following seller: ' + error.message);
   }
 }
 
-// جلب منتجات البائعين المُتابعين
 async function fetchFollowingProducts() {
   try {
     const response = await fetch(`${API_URL}/users/following-products`, {
@@ -175,7 +167,7 @@ async function fetchFollowingProducts() {
     const productsContainer = document.getElementById('followingProductsContainer');
     productsContainer.innerHTML = '';
     if (result.products.length === 0) {
-      productsContainer.innerHTML = '<p>لا توجد منتجات للبائعين المُتابعين</p>';
+      productsContainer.innerHTML = '<p>No products available from followed sellers</p>';
       return;
     }
     result.products.forEach(product => {
@@ -185,12 +177,12 @@ async function fetchFollowingProducts() {
         <img src="${product.image || 'default.png'}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <p>التصنيف: ${product.category}</p>
-        <p>البائع: ${product.seller.username}</p>
+        <p>Category: ${product.category}</p>
+        <p>Seller: ${product.seller.username}</p>
       `;
       productsContainer.appendChild(productCard);
     });
   } catch (error) {
-    alert('خطأ أثناء جلب المنتجات: ' + error.message);
+    alert('Error fetching products: ' + error.message);
   }
 }
