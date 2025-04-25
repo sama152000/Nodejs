@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول / التسجيل</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>تسجيل الدخول / التسجيل</h1>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <!-- نموذج تسجيل الدخول -->
+      <h2>تسجيل الدخول</h2>
+      <form id="loginForm">
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+        <input type="password" name="password" placeholder="كلمة المرور" required>
+        <button type="submit">تسجيل الدخول</button>
+      </form>
+
+      <!-- نموذج التسجيل -->
+      <h2>إنشاء حساب</h2>
+      <form id="registerForm">
+        <input type="text" name="username" placeholder="اسم المستخدم" required>
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+        <input type="password" name="password" placeholder="كلمة المرور" required>
+        <select name="role">
+          <option value="user">مستخدم</option>
+          <option value="seller">بائع</option>
+        </select>
+        <button type="submit">إنشاء حساب</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // تسجيل الدخول
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      await login(data);
+    });
+
+    // التسجيل
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      await register(data);
+    });
+  </script>
+</body>
+</html>

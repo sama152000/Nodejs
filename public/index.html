@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر الملابس</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>متجر الملابس</h1>
+    <nav>
+      <a href="login.html" id="loginLink">تسجيل الدخول</a>
+      <a href="#" id="logoutLink" style="display: none;" onclick="logout()">تسجيل الخروج</a>
+      <a href="add-product.html" id="addProductLink" style="display: none;">إضافة منتج</a>
+      <a href="following.html" id="followingLink" style="display: none;">البائعين المُتابعين</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>المنتجات المتاحة</h2>
+    <input type="text" id="searchInput" placeholder="ابحث عن منتج..." onkeyup="searchProducts()">
+    <div id="productsContainer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // تحميل المنتجات عند فتح الصفحة
+    window.onload = () => {
+      checkAuth();
+      fetchProducts();
+    };
+  </script>
+</body>
+</html>

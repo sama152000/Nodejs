@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البائعين المُتابعين</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>البائعين المُتابعين</h1>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="#" onclick="logout()">تسجيل الخروج</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>متابعة بائع</h2>
+    <form id="followForm">
+      <input type="text" name="sellerId" placeholder="معرف البائع" required>
+      <button type="submit">متابعة</button>
+    </form>
+
+    <h2>المنتجات من البائعين المُتابعين</h2>
+    <div id="followingProductsContainer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    window.onload = () => {
+      checkAuth();
+      fetchFollowingProducts();
+    };
+
+    document.getElementById('followForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const sellerId = formData.get('sellerId');
+      await followSeller(sellerId);
+      fetchFollowingProducts(); // تحديث المنتجات بعد المتابعة
+    });
+  </script>
+</body>
+</html>
